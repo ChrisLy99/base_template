@@ -1,4 +1,4 @@
-# 1) choose base container
+# choose base container
 # generally use the most recent tag
 
 # data science notebook
@@ -13,17 +13,22 @@ FROM $BASE_CONTAINER
 
 LABEL maintainer="UC San Diego ITS/ETS <ets-consult@ucsd.edu>"
 
-# 2) change to root to install packages
+# change to root to install packages
 USER root
 
-RUN apt-get -y install aria2 && \
-    apt-get -y install nmap && \
-    apt-get -y install traceroute
+# RUN apt-get -y install aria2 && \
+#    apt-get -y install nmap && \
+#    apt-get -y install traceroute
 
-# 3) install packages
-RUN pip install --no-cache-dir geopandas babypandas
+# install packages
+RUN pip install --no-cache-dir twarc
 
-# 4) change back to notebook user
+# change allocated resources
+RUN K8S_NUM_GPU=0  # max of 1 (contact ETS to raise limit)
+RUN K8S_NUM_CPU=4  # max of 8 ("")
+RUN K8S_GB_MEM=32  # max of 64 ("")
+
+# change back to notebook user
 COPY /run_jupyter.sh /
 RUN chmod 755 /run_jupyter.sh
 USER $NB_UID
