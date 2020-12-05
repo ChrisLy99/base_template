@@ -21,12 +21,7 @@ USER root
 #    apt-get -y install traceroute
 
 # install packages
-RUN pip install --no-cache-dir twarc
-
-# change allocated resources
-RUN K8S_NUM_GPU=0  # max of 1 (contact ETS to raise limit)
-RUN K8S_NUM_CPU=8  # max of 8 ("")
-RUN K8S_GB_MEM=32  # max of 64 ("")
+RUN pip install --no-cache-dir twarc tweepy
 
 # change back to notebook user
 COPY /run_jupyter.sh /
