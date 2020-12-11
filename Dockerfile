@@ -21,7 +21,7 @@ USER root
 #    apt-get -y install traceroute
 
 # install packages
-RUN pip install --no-cache-dir twarc tweepy
+RUN pip install --no-cache-dir twarc tweepy pyyaml
 
 # change back to notebook user
 COPY /run_jupyter.sh /
