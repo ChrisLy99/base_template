@@ -21,7 +21,7 @@ USER root
 #    apt-get -y install traceroute
 
 # install packages
-RUN pip install --no-cache-dir twarc tweepy pyyaml wordcloud collections
+RUN pip install --no-cache-dir twarc tweepy pyyaml wordcloud
 
 # change back to notebook user
 COPY /run_jupyter.sh /
